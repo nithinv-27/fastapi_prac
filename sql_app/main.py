@@ -3,16 +3,25 @@ from pydantic import BaseModel
 import models
 from database import SessionLocal, engine
 from sqlalchemy.orm import Session
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
 
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # basic home_page
-@app.get('/{id}/')
-def home(id:int, num:str):
-    if num:
-        return f'home_num: {num}'
-    return f'home_id: {id}'
+@app.get('/home/{id}')
+def home(id:int=None):
+    return {'hello':id}
 
 
 #Request body
