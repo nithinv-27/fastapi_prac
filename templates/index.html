@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head >
+        <meta charset="utf-8" />
+        <!-- Redirect page after 3 seconds -->
+        <!-- <meta http-equiv="refresh" content="3;url=file:///C:/Users/nithi/OneDrive/Desktop/front_end_test/index.html" /> -->
+        <meta name="description" content="a test website">
+        <link href="static/style.css" rel="stylesheet" />
+        <link
+  href="https://fonts.googleapis.com/css?family=Open+Sans"
+  rel="stylesheet" />
+
+        <title>Test_site</title>
+    </head>
+
+    <body>
+        <div class="h1">
+            <h1>WebPage</h1>
+        </div>
+
+        <div id="input">
+            <p>Enter Id, title, description</p>
+            <form id="form_id">
+                <!-- <div id="item_id_div">
+                    <input type="text" name="id" id="item_id">
+                </div> -->
+                <div id="item_title_div">
+                    <input type="text" name="item_title" id="item_title_id">
+                </div>
+                <div id="item_desc_div">
+                    <input type="text" name="item_desc" id="item_desc_id">
+                </div>
+                <input type="submit" value="submit" id="submit_btn">
+            </form>
+        </div>  
+        
+        <script>
+
+            fetch("http://127.0.0.1:8000/items/query/2",{
+                mode: 'no-cors',
+                credentials: 'include',
+                method: 'GET'
+            })
+            .then(response=>{
+                if(!response.ok){
+                    throw new Error('Network response was not ok');
+                }
+
+                else{
+                    return response.json();
+                }
+            })
+            .then(data=>{
+                console.log('Data:',data);
+            })
+            .catch(error=>{
+                console.log('Error:',error);
+            })
+
+        </script>
+        
+    </body>    
+
+</html>
