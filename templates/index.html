@@ -21,9 +21,9 @@
         <div id="input">
             <p>Enter Id, title, description</p>
             <form id="form_id">
-                <!-- <div id="item_id_div">
+                <div id="item_id_div">
                     <input type="text" name="id" id="item_id">
-                </div> -->
+                </div>
                 <div id="item_title_div">
                     <input type="text" name="item_title" id="item_title_id">
                 </div>
@@ -36,10 +36,12 @@
         
         <script>
 
-            fetch("http://127.0.0.1:8000/items/query/2",{
-                mode: 'no-cors',
-                credentials: 'include',
-                method: 'GET'
+            function get_id(event){
+                event.preventDefault();
+                var id= document.getElementById("item_id").value;
+
+            fetch(`http://127.0.0.1:8000/items/query/${id}`,{
+            method: 'GET'
             })
             .then(response=>{
                 if(!response.ok){
@@ -56,6 +58,9 @@
             .catch(error=>{
                 console.log('Error:',error);
             })
+            }
+
+            document.getElementById("form_id").addEventListener("submit", get_id)
 
         </script>
         
